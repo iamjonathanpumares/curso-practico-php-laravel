@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Models\Nota;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,19 +21,14 @@ use App\Models\Nota;
 // U: Update (Actualizar un registro)
 // D: Delete (Eliminar un registro)
 
-Route::get('notas/index', function () {
-    $notas = Nota::all();
-    return view('notas', ['notas' => $notas]);
-})->name('notas.index');
+Route::get('notas/index', 'NotaController@index')->name('notas.index');
 
 // Rutas con parámetros
-Route::get('notas/{id}', function ($id) {
-    return 'Detalle de la nota: ' . $id;
-})->where('id', '[0-9]+');
+Route::get('notas/{id}', 'NotaController@view')->where('id', '[0-9]+');
 
-Route::get('notas/crear', function () {
-    return view('add-note');
-})->name('notas.crear');
+Route::get('notas/crear', 'NotaController@create')->name('notas.crear');
+
+Route::post('notas', 'NotaController@store')->name('notas.store');
 
 Route::get('notas/{id}/editar', function () {
     return 'Formulario para editar notas';
