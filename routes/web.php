@@ -23,16 +23,18 @@ use Illuminate\Http\Request;
 
 Route::get('notas/index', 'NotaController@index')->name('notas.index');
 
-// Rutas con parámetros
-Route::get('notas/{id}', 'NotaController@view')->where('id', '[0-9]+');
-
 Route::get('notas/crear', 'NotaController@create')->name('notas.crear');
+
+// Rutas con parámetros
+Route::get('notas/{nota}', 'NotaController@view');
 
 Route::post('notas', 'NotaController@store')->name('notas.store');
 
-Route::get('notas/{id}/editar', function () {
-    return 'Formulario para editar notas';
-});
+Route::get('notas/{nota}/editar', 'NotaController@edit')->name('notas.edit');
+
+Route::put('notas/{nota}', 'NotaController@update')->name('notas.update');
+
+Route::delete('notas/{nota}', 'NotaController@destroy')->name('notas.destroy');
 
 Route::get('hola', function () {
     return 'Hola culebrita'; // Retorna una cadena

@@ -26,7 +26,29 @@ class NotaController extends Controller
         return redirect()->route('notas.index');
     }
 
-    public function view($id) {
-        return 'Detalle de la nota: ' . $id;
+    public function edit(Nota $nota) {
+        return view('edit-note', ['nota' => $nota]);
+    }
+
+    public function update(Nota $nota, Request $request) {
+        // Validar los datos
+        $request->validate([
+            'title' => 'required',
+            'content' => 'required',
+        ]);
+
+        // Actualizar los datos
+        $data = $request->all();
+        $nota->update($data);
+        return redirect()->route('notas.index');
+    }
+
+    public function view(Nota $nota) {
+        return view('view-note', ['nota' => $nota]);
+    }
+
+    public function destroy(Nota $nota) {
+        $nota->delete();
+        return redirect()->route('notas.index');
     }
 }

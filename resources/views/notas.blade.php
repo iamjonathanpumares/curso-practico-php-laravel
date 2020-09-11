@@ -13,6 +13,12 @@
                     <div class="card-body">
                     <h5 class="card-title">{{ $nota->title }}</h5>
                     <p class="card-text">{{ $nota->content }}</p>
+                    <a href="{{ route('notas.edit', ['nota' => $nota]) }}" class="btn btn-primary">Editar</a>
+                    <form method="POST" action="{{ route('notas.destroy', $nota) }}">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger">Eliminar</button>
+                    </form>
                     </div>
                 </div>
             </div>

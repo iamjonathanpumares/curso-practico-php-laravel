@@ -20,6 +20,8 @@ class CreateNotasTable extends Migration
             $table->text('content');
 
             $table->timestamps();
+
+            $table->softDeletes('deleted_at', 0);
         });
     }
 
